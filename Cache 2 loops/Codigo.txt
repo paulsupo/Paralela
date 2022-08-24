@@ -1,0 +1,34 @@
+#include <iostream>
+#include <chrono>
+using namespace std;
+#define MAX 1001
+int main()
+{
+    double A[MAX][MAX], x[MAX], y[MAX];
+    chrono::time_point<std::chrono::high_resolution_clock> start, end, end2, end3;
+    int i, j;
+
+
+    start = std::chrono::high_resolution_clock::now();
+    for (i = 0; i < MAX; i++) {
+        for (j = 0; j < MAX; j++) {
+            y[i] += A[i][j] * x[j];
+        }
+    }
+     end = chrono::high_resolution_clock::now();
+
+    end2 = std::chrono::high_resolution_clock::now();
+    for (j = 0; j < MAX; j++) {
+        for (i = 0; i < MAX; i++) {
+            y[i] += A[i][j] * x[j];
+        }
+    }
+    end3 = std::chrono::high_resolution_clock::now();
+
+    int64_t duration4 = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count();
+    int64_t duration5 = std::chrono::duration_cast<std::chrono::nanoseconds>(end3 - end2).count();
+    cout << duration4 << endl;
+    cout << duration5 << endl;
+  
+
+}
